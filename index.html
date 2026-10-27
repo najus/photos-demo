@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photos — UI Experiments (Demo)</title>
+<meta name="description" content="Demo playground of gallery UI experiments for photos.sujanthapa.com. Not the live site.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
+<link rel="stylesheet" href="demo.css?v=1">
+</head>
+<body>
+<div class="demo-bar">
+  <span class="demo-tag">🧪 DEMO</span>
+  <span class="demo-note">Experiments for photos.sujanthapa.com — the live site is untouched. Tell Yeti the experiment numbers you like.</span>
+  <span class="demo-actions">
+    <button id="themeBtn" type="button">🌑 Darkroom</button>
+    <button id="shuffleBtn" type="button">🔀 Shuffle grid</button>
+  </span>
+</div>
+
+<header class="masthead">
+  <p class="kicker">Sujan Thapa · Photography</p>
+  <h1>Gallery, <em>reimagined</em></h1>
+  <p class="lede">Six experiments, all running on your real 90 Flickr photos. Scroll through, play with the controls, and pick your favourites.</p>
+</header>
+
+<!-- ① Story hero -->
+<section class="exp" id="exp1">
+  <div class="exp-head"><span class="exp-num">01</span><div><h2>Story hero</h2><p>A cinematic opener, like the timeline's story mode: slow Ken Burns zoom, segment bars, auto-advance — hold the photo to pause.</p></div></div>
+  <div class="story" id="story">
+    <img id="storyImg" alt="">
+    <div class="story-shade"></div>
+    <div class="story-segs" id="storySegs"></div>
+    <div class="story-cap"><h3 id="storyTitle"></h3><p id="storyMeta"></p></div>
+    <span class="story-count" id="storyCount"></span>
+  </div>
+</section>
+
+<!-- ② Editorial album index -->
+<section class="exp" id="exp2">
+  <div class="exp-head"><span class="exp-num">02</span><div><h2>Editorial album index</h2><p>Albums as a big-type table of contents. On desktop, hover a row — a preview follows your cursor. (The trick personal sites like paco.me made famous.)</p></div></div>
+  <div class="index-list" id="indexList"></div>
+  <div class="cursor-preview" id="cursorPreview"><img alt=""></div>
+</section>
+
+<!-- ③ Grid playground -->
+<section class="exp" id="exp3">
+  <div class="exp-head"><span class="exp-num">03</span><div><h2>The grid playground</h2><p>One grid, many personalities. Switch layout, density, and what a hover reveals. Every tile is tinted with its photo's real dominant colour while it loads — and glows with it in Darkroom mode.</p></div></div>
+  <div class="controls">
+    <div class="ctl"><span>Album</span><span class="pills" id="albumPills"></span></div>
+    <div class="ctl"><span>Layout</span><span class="pills" data-ctl="layout">
+      <button data-v="masonry" class="on">Masonry</button><button data-v="justified">Justified</button><button data-v="square">Square</button></span></div>
+    <div class="ctl"><span>Density</span><span class="pills" data-ctl="density">
+      <button data-v=" comfy" class="on">Comfortable</button><button data-v="compact">Compact</button></span></div>
+    <div class="ctl"><span>Hover reveals</span><span class="pills" data-ctl="hover">
+      <button data-v="exif" class="on">EXIF</button><button data-v="title">Title only</button><button data-v="none">Nothing</button></span></div>
+  </div>
+  <div class="grid masonry" id="grid"></div>
+  <p class="hint">Click any photo for experiment 05 — the lightbox.</p>
+</section>
+
+<!-- ④ Filmstrip -->
+<section class="exp" id="exp4">
+  <div class="exp-head"><span class="exp-num">04</span><div><h2>Filmstrip</h2><p>The Airplanes album as a roll of film — sprocket holes, frame numbers, drag or scroll sideways. Pure nostalgia for the film era, CSS-only.</p></div></div>
+  <div class="film" id="film"><div class="film-track" id="filmTrack"></div></div>
+</section>
+
+<!-- ⑥ Colour story -->
+<section class="exp" id="exp6">
+  <div class="exp-head"><span class="exp-num">06</span><div><h2>Colour story</h2><p>Your whole archive sorted by its dominant colour — a rainbow index. Photographers use this as a surprisingly beautiful way to browse. Click a swatch-photo to open it.</p></div></div>
+  <div class="colour-wall" id="colourWall"></div>
+</section>
+
+<footer class="demo-foot">
+  <h2>The menu</h2>
+  <ol>
+    <li><strong>Story hero</strong> — cinematic auto-playing opener</li>
+    <li><strong>Editorial album index</strong> — big-type rows + cursor-following previews</li>
+    <li><strong>Grid playground</strong> — masonry / justified / square, density, EXIF hover, colour tinting</li>
+    <li><strong>Filmstrip</strong> — horizontal film-roll album view</li>
+    <li><strong>Lightbox Pro</strong> — ambient colour glow, filmstrip thumbs, EXIF panel (click any photo)</li>
+    <li><strong>Colour story</strong> — browse the archive sorted by dominant colour</li>
+    <li><strong>Darkroom mode</strong> — the 🌑 toggle up top restyles the whole page</li>
+  </ol>
+  <p>Built as a throwaway demo — <a href="https://photos.sujanthapa.com">back to the live gallery</a> · photos via Flickr.</p>
+</footer>
+
+<!-- ⑤ Lightbox Pro -->
+<div class="lb" id="lb" hidden>
+  <div class="lb-glow" id="lbGlow"></div>
+  <button class="lb-x" id="lbClose" aria-label="Close">×</button>
+  <button class="lb-nav prev" id="lbPrev" aria-label="Previous">‹</button>
+  <figure class="lb-main">
+    <img id="lbImg" alt="">
+    <figcaption><strong id="lbTitle"></strong><span id="lbExif"></span></figcaption>
+  </figure>
+  <button class="lb-nav next" id="lbNext" aria-label="Next">›</button>
+  <div class="lb-strip" id="lbStrip"></div>
+  <span class="lb-count" id="lbCount"></span>
+</div>
+
+<script src="demo.js?v=1"></script>
+</body>
+</html>
